@@ -1,0 +1,4 @@
+/Users/abhishek/Library/Android/sdk/cmake/3.18.1/bin/ninja \
+  -C \
+  /Users/abhishek/Billboard/openCV1/.cxx/Debug/4r3q6y6j/x86 \
+  opencv_jni_shared

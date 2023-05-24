@@ -1,0 +1,184 @@
+[
+  {
+    "level_": 0,
+    "message_": "Start JSON generation. Platform version: 24 min SDK version: armeabi-v7a",
+    "file_": "/Users/abhishek/Billboard/openCV1/libcxx_helper/CMakeLists.txt",
+    "tag_": "debug|armeabi-v7a",
+    "diagnosticCode_": 0,
+    "memoizedIsInitialized": 1,
+    "unknownFields": {
+      "fields": {},
+      "fieldsDescending": {}
+    },
+    "memoizedSize": -1,
+    "memoizedHashCode": 1067309155
+  },
+  {
+    "level_": 0,
+    "message_": "rebuilding JSON /Users/abhishek/Billboard/openCV1/.cxx/Debug/4r3q6y6j/armeabi-v7a/android_gradle_build.json due to:",
+    "file_": "/Users/abhishek/Billboard/openCV1/libcxx_helper/CMakeLists.txt",
+    "tag_": "debug|armeabi-v7a",
+    "diagnosticCode_": 0,
+    "memoizedIsInitialized": 1,
+    "unknownFields": {
+      "fields": {},
+      "fieldsDescending": {}
+    },
+    "memoizedSize": -1,
+    "memoizedHashCode": -970703296
+  },
+  {
+    "level_": 0,
+    "message_": "- expected json /Users/abhishek/Billboard/openCV1/.cxx/Debug/4r3q6y6j/armeabi-v7a/android_gradle_build.json file is not present, will remove stale json folder",
+    "file_": "/Users/abhishek/Billboard/openCV1/libcxx_helper/CMakeLists.txt",
+    "tag_": "debug|armeabi-v7a",
+    "diagnosticCode_": 0,
+    "memoizedIsInitialized": 1,
+    "unknownFields": {
+      "fields": {},
+      "fieldsDescending": {}
+    },
+    "memoizedSize": -1,
+    "memoizedHashCode": 1275568532
+  },
+  {
+    "level_": 0,
+    "message_": "- missing previous command file /Users/abhishek/Billboard/openCV1/.cxx/Debug/4r3q6y6j/armeabi-v7a/metadata_generation_command.txt, will remove stale json folder",
+    "file_": "/Users/abhishek/Billboard/openCV1/libcxx_helper/CMakeLists.txt",
+    "tag_": "debug|armeabi-v7a",
+    "diagnosticCode_": 0,
+    "memoizedIsInitialized": 1,
+    "unknownFields": {
+      "fields": {},
+      "fieldsDescending": {}
+    },
+    "memoizedSize": -1,
+    "memoizedHashCode": 1758084978
+  },
+  {
+    "level_": 0,
+    "message_": "- command changed from previous, will remove stale json folder",
+    "file_": "/Users/abhishek/Billboard/openCV1/libcxx_helper/CMakeLists.txt",
+    "tag_": "debug|armeabi-v7a",
+    "diagnosticCode_": 0,
+    "memoizedIsInitialized": 1,
+    "unknownFields": {
+      "fields": {},
+      "fieldsDescending": {}
+    },
+    "memoizedSize": -1,
+    "memoizedHashCode": 1054782802
+  },
+  {
+    "level_": 0,
+    "message_": "removing stale contents from \u0027/Users/abhishek/Billboard/openCV1/.cxx/Debug/4r3q6y6j/armeabi-v7a\u0027",
+    "file_": "/Users/abhishek/Billboard/openCV1/libcxx_helper/CMakeLists.txt",
+    "tag_": "debug|armeabi-v7a",
+    "diagnosticCode_": 0,
+    "memoizedIsInitialized": 1,
+    "unknownFields": {
+      "fields": {},
+      "fieldsDescending": {}
+    },
+    "memoizedSize": -1,
+    "memoizedHashCode": -1673391571
+  },
+  {
+    "level_": 0,
+    "message_": "created folder \u0027/Users/abhishek/Billboard/openCV1/.cxx/Debug/4r3q6y6j/armeabi-v7a\u0027",
+    "file_": "/Users/abhishek/Billboard/openCV1/libcxx_helper/CMakeLists.txt",
+    "tag_": "debug|armeabi-v7a",
+    "diagnosticCode_": 0,
+    "memoizedIsInitialized": 1,
+    "unknownFields": {
+      "fields": {},
+      "fieldsDescending": {}
+    },
+    "memoizedSize": -1,
+    "memoizedHashCode": -1440303559
+  },
+  {
+    "level_": 0,
+    "message_": "executing cmake /Users/abhishek/Library/Android/sdk/cmake/3.18.1/bin/cmake \\\n  -H/Users/abhishek/Billboard/openCV1/libcxx_helper \\\n  -DCMAKE_SYSTEM_NAME\u003dAndroid \\\n  -DCMAKE_EXPORT_COMPILE_COMMANDS\u003dON \\\n  -DCMAKE_SYSTEM_VERSION\u003d24 \\\n  -DANDROID_PLATFORM\u003dandroid-24 \\\n  -DANDROID_ABI\u003darmeabi-v7a \\\n  -DCMAKE_ANDROID_ARCH_ABI\u003darmeabi-v7a \\\n  -DANDROID_NDK\u003d/Users/abhishek/Library/Android/sdk/ndk/23.1.7779620 \\\n  -DCMAKE_ANDROID_NDK\u003d/Users/abhishek/Library/Android/sdk/ndk/23.1.7779620 \\\n  -DCMAKE_TOOLCHAIN_FILE\u003d/Users/abhishek/Library/Android/sdk/ndk/23.1.7779620/build/cmake/android.toolchain.cmake \\\n  -DCMAKE_MAKE_PROGRAM\u003d/Users/abhishek/Library/Android/sdk/cmake/3.18.1/bin/ninja \\\n  -DCMAKE_LIBRARY_OUTPUT_DIRECTORY\u003d/Users/abhishek/Billboard/openCV1/build/intermediates/cxx/Debug/4r3q6y6j/obj/armeabi-v7a \\\n  -DCMAKE_RUNTIME_OUTPUT_DIRECTORY\u003d/Users/abhishek/Billboard/openCV1/build/intermediates/cxx/Debug/4r3q6y6j/obj/armeabi-v7a \\\n  -DCMAKE_BUILD_TYPE\u003dDebug \\\n  -B/Users/abhishek/Billboard/openCV1/.cxx/Debug/4r3q6y6j/armeabi-v7a \\\n  -GNinja \\\n  -DANDROID_STL\u003dc++_shared\n",
+    "file_": "/Users/abhishek/Billboard/openCV1/libcxx_helper/CMakeLists.txt",
+    "tag_": "debug|armeabi-v7a",
+    "diagnosticCode_": 0,
+    "memoizedIsInitialized": 1,
+    "unknownFields": {
+      "fields": {},
+      "fieldsDescending": {}
+    },
+    "memoizedSize": -1,
+    "memoizedHashCode": -232428497
+  },
+  {
+    "level_": 0,
+    "message_": "/Users/abhishek/Library/Android/sdk/cmake/3.18.1/bin/cmake \\\n  -H/Users/abhishek/Billboard/openCV1/libcxx_helper \\\n  -DCMAKE_SYSTEM_NAME\u003dAndroid \\\n  -DCMAKE_EXPORT_COMPILE_COMMANDS\u003dON \\\n  -DCMAKE_SYSTEM_VERSION\u003d24 \\\n  -DANDROID_PLATFORM\u003dandroid-24 \\\n  -DANDROID_ABI\u003darmeabi-v7a \\\n  -DCMAKE_ANDROID_ARCH_ABI\u003darmeabi-v7a \\\n  -DANDROID_NDK\u003d/Users/abhishek/Library/Android/sdk/ndk/23.1.7779620 \\\n  -DCMAKE_ANDROID_NDK\u003d/Users/abhishek/Library/Android/sdk/ndk/23.1.7779620 \\\n  -DCMAKE_TOOLCHAIN_FILE\u003d/Users/abhishek/Library/Android/sdk/ndk/23.1.7779620/build/cmake/android.toolchain.cmake \\\n  -DCMAKE_MAKE_PROGRAM\u003d/Users/abhishek/Library/Android/sdk/cmake/3.18.1/bin/ninja \\\n  -DCMAKE_LIBRARY_OUTPUT_DIRECTORY\u003d/Users/abhishek/Billboard/openCV1/build/intermediates/cxx/Debug/4r3q6y6j/obj/armeabi-v7a \\\n  -DCMAKE_RUNTIME_OUTPUT_DIRECTORY\u003d/Users/abhishek/Billboard/openCV1/build/intermediates/cxx/Debug/4r3q6y6j/obj/armeabi-v7a \\\n  -DCMAKE_BUILD_TYPE\u003dDebug \\\n  -B/Users/abhishek/Billboard/openCV1/.cxx/Debug/4r3q6y6j/armeabi-v7a \\\n  -GNinja \\\n  -DANDROID_STL\u003dc++_shared\n",
+    "file_": "/Users/abhishek/Billboard/openCV1/libcxx_helper/CMakeLists.txt",
+    "tag_": "debug|armeabi-v7a",
+    "diagnosticCode_": 0,
+    "memoizedIsInitialized": 1,
+    "unknownFields": {
+      "fields": {},
+      "fieldsDescending": {}
+    },
+    "memoizedSize": -1,
+    "memoizedHashCode": 579030416
+  },
+  {
+    "level_": 0,
+    "message_": "Exiting generation of /Users/abhishek/Billboard/openCV1/.cxx/Debug/4r3q6y6j/armeabi-v7a/compile_commands.json.bin normally",
+    "file_": "/Users/abhishek/Billboard/openCV1/libcxx_helper/CMakeLists.txt",
+    "tag_": "debug|armeabi-v7a",
+    "diagnosticCode_": 0,
+    "memoizedIsInitialized": 1,
+    "unknownFields": {
+      "fields": {},
+      "fieldsDescending": {}
+    },
+    "memoizedSize": -1,
+    "memoizedHashCode": -1781474050
+  },
+  {
+    "level_": 0,
+    "message_": "done executing cmake",
+    "file_": "/Users/abhishek/Billboard/openCV1/libcxx_helper/CMakeLists.txt",
+    "tag_": "debug|armeabi-v7a",
+    "diagnosticCode_": 0,
+    "memoizedIsInitialized": 1,
+    "unknownFields": {
+      "fields": {},
+      "fieldsDescending": {}
+    },
+    "memoizedSize": -1,
+    "memoizedHashCode": 742436551
+  },
+  {
+    "level_": 0,
+    "message_": "write command file /Users/abhishek/Billboard/openCV1/.cxx/Debug/4r3q6y6j/armeabi-v7a/metadata_generation_command.txt",
+    "file_": "/Users/abhishek/Billboard/openCV1/libcxx_helper/CMakeLists.txt",
+    "tag_": "debug|armeabi-v7a",
+    "diagnosticCode_": 0,
+    "memoizedIsInitialized": 1,
+    "unknownFields": {
+      "fields": {},
+      "fieldsDescending": {}
+    },
+    "memoizedSize": -1,
+    "memoizedHashCode": -556454988
+  },
+  {
+    "level_": 0,
+    "message_": "JSON generation completed without problems",
+    "file_": "/Users/abhishek/Billboard/openCV1/libcxx_helper/CMakeLists.txt",
+    "tag_": "debug|armeabi-v7a",
+    "diagnosticCode_": 0,
+    "memoizedIsInitialized": 1,
+    "unknownFields": {
+      "fields": {},
+      "fieldsDescending": {}
+    },
+    "memoizedSize": -1,
+    "memoizedHashCode": -1614457661
+  }
+]
