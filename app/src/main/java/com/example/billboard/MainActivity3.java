@@ -2,6 +2,7 @@ package com.example.billboard;
 
 import android.Manifest;
 import android.annotation.SuppressLint;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
@@ -12,6 +13,8 @@ import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.util.Log;
+import android.util.Pair;
 import android.view.View;
 import android.widget.Button;
 import android.widget.FrameLayout;
@@ -21,6 +24,7 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
@@ -29,6 +33,7 @@ import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.util.ArrayList;
 
 public class MainActivity3 extends AppCompatActivity {
     private FrameLayout fl_layout;
@@ -39,6 +44,9 @@ public class MainActivity3 extends AppCompatActivity {
     private ImageView iv_imgView;
     private ImageButton rotateButton,Undo,imageButton,mImageCurrentImageBtn;
     private Button process;
+    private Pair<Float, Float> coordinates;
+    private ArrayList<Pair<Float, Float>> coordinatesList;
+
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -95,26 +103,20 @@ public class MainActivity3 extends AppCompatActivity {
             }
         });
 
-        //For Saving Purpose Dont need it now
-//        save.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                if (isReadStorageAllowed()) {
-//                    new BitmapAsyncTask(getBitmapFromView(fl_layout)).execute();
-//                } else {
-//                    requestStoragePermission();
-//                }
-//            }
-//        });
-
-        //process
         process = findViewById(R.id.process);
+        coordinatesList = new ArrayList<>();
         process.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent i = new Intent(MainActivity3.this,MainActivity4.class);
                 File file = new File(getExternalFilesDir(null), "image.png");
                 Bitmap bitmap_new = getBitmapFromView(fl_layout);
+                coordinates = drawing_view.coordinates;
+
+                    coordinatesList = drawing_view.coordinates_List;
+
+                Log.d("Size",String.valueOf(coordinatesList.size()));
+                Log.d("Coordinates", String.valueOf(coordinatesList));
                 FileOutputStream outputStream;
                 try {
                     outputStream = new FileOutputStream(file);

@@ -21,7 +21,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
     }
     public void home(View view){
-        Intent i=new Intent(MainActivity.this,MainActivity2.class);
+        Intent i=new Intent(MainActivity.this,MainActivity3.class);
         startActivity(i);
     }
     @Override
