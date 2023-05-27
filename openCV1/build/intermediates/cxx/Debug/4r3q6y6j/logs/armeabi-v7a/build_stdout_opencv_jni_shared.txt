@@ -1,3 +1,2 @@
 ninja: Entering directory `/Users/abhishek/Billboard/openCV1/.cxx/Debug/4r3q6y6j/armeabi-v7a'
-[1/2] Building CXX object CMakeFiles/opencv_jni_shared.dir/dummy.cpp.o
-[2/2] Linking CXX static library libopencv_jni_shared.a
+ninja: no work to do.

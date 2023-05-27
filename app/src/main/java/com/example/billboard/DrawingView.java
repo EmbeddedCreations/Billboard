@@ -37,6 +37,7 @@ public final class DrawingView extends View {
     private final ArrayList mPaths;
     private final ArrayList mUndo;
     private HashMap _$_findViewCache;
+    public Pair<Float, Float> coordinates;
 
     private final void setupDrawing() {
         this.mDrawPaint = new Paint();
@@ -121,19 +122,23 @@ public final class DrawingView extends View {
     }
 
     private ArrayList<Pair<Float, Float>> coordinatesList = new ArrayList<>();
+    public ArrayList<Pair<Float, Float>> coordinates_List = new ArrayList<>();
 
     public boolean onTouchEvent(@Nullable MotionEvent event) {
         label49: {
             Float touchx = event != null ? event.getX() : null;
             Float touchy = event != null ? event.getY() : null;
-//            Log.d("Cord", touchx.toString());
-//            Log.d("Cord", touchy.toString());
+            Log.d("Cord", touchx.toString());
+            Log.d("Cord", touchy.toString());
 
-//            Pair<Float, Float> coordinates = new Pair<>(touchx, touchy);
-//            if (!coordinatesList.contains(coordinates)) {
-//                coordinatesList.add(coordinates);
-//            }
-//            Log.d("abc", String.valueOf(coordinatesList));
+            coordinates = new Pair<>(touchx, touchy);
+            if (!coordinatesList.contains(coordinates)) {
+                coordinatesList.add(coordinates);
+            }
+            if(coordinatesList.size()>3){
+                coordinates_List = coordinatesList;
+            }
+            Log.d("abc", String.valueOf(coordinatesList));
 
             Integer var4 = event != null ? event.getAction() : null;
             boolean var5 = false;
