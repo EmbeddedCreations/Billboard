@@ -38,6 +38,7 @@ public final class DrawingView extends View {
     private final ArrayList mUndo;
     private HashMap _$_findViewCache;
     public Pair<Float, Float> coordinates;
+    public boolean full=false,overflow=false,underflow=false;
 
     private final void setupDrawing() {
         this.mDrawPaint = new Paint();
@@ -60,10 +61,32 @@ public final class DrawingView extends View {
     public final void clickOnUndo() {
         if (this.mPaths.size() > 0) {
             this.mUndo.add(this.mPaths.remove(this.mPaths.size() - 1));
+            int lastIndex = coordinatesList.size()-1;
+            coordinatesList.remove(lastIndex);
             this.invalidate();
         }
 
     }
+
+    public void clearPaths() {
+        mPaths.clear();
+        coordinatesList.clear();
+        invalidate(); // Trigger a redraw if needed
+    }
+
+    public void drawLine(float startX, float startY, float endX, float endY) {
+        // Create a new path for the line
+        CustomPath linePath = new CustomPath(Color.GREEN, mBrushSize);
+        linePath.moveTo(startX, startY);
+        linePath.lineTo(endX, endY);
+
+        // Add the line path to the paths list
+        mPaths.add(linePath);
+
+        // Invalidate the view to trigger a redraw
+        invalidate();
+    }
+
 
     public final void setColor(@NotNull String newColor) {
         Intrinsics.checkNotNullParameter(newColor, "newColor");
@@ -121,8 +144,8 @@ public final class DrawingView extends View {
 
     }
 
-    private ArrayList<Pair<Float, Float>> coordinatesList = new ArrayList<>();
-    public ArrayList<Pair<Float, Float>> coordinates_List = new ArrayList<>();
+    public ArrayList<Pair<Float, Float>> coordinatesList = new ArrayList<>();
+
 
     public boolean onTouchEvent(@Nullable MotionEvent event) {
         label49: {
@@ -135,11 +158,6 @@ public final class DrawingView extends View {
             if (!coordinatesList.contains(coordinates)) {
                 coordinatesList.add(coordinates);
             }
-            if(coordinatesList.size()>3){
-                coordinates_List = coordinatesList;
-            }
-            Log.d("abc", String.valueOf(coordinatesList));
-
             Integer var4 = event != null ? event.getAction() : null;
             boolean var5 = false;
             CustomPath var7;
