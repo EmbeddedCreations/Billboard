@@ -82,21 +82,9 @@ public class MainActivity4 extends AppCompatActivity {
 
     public void onBackPressed()
     {
-        AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity4.this);
-
-        builder.setTitle("You Want to go Back")
-                .setMessage("Are you sure ?")
-                .setPositiveButton("ok", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialogInterface, int i) {
-                        Intent resultIntent = new Intent();
-                        setResult(RESULT_OK, resultIntent);
-                        MainActivity4.super.onBackPressed();
-                    }
-                })
-                .setNegativeButton("Cancel",null).setCancelable(false);
-        AlertDialog alert = builder.create();
-        alert.show();
+        Intent resultIntent = new Intent();
+        setResult(RESULT_OK, resultIntent);
+        super.onBackPressed();
     }
 
 }

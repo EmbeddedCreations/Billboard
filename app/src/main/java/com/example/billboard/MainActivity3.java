@@ -20,6 +20,7 @@ import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -51,7 +52,7 @@ public class MainActivity3 extends AppCompatActivity {
     private FrameLayout fl_layout;
     private static final int STORAGE_PERMISSION = 1;
     private static final int GALLERY = 2;
-    private Bitmap bitmap;
+    private Bitmap bitmap,bitmap_copy;
     private DrawingView drawing_view;
     private ImageView iv_imgView;
     private ImageButton rotateButton,Undo,imageButton,mImageCurrentImageBtn;
@@ -59,6 +60,8 @@ public class MainActivity3 extends AppCompatActivity {
     private Pair<Float, Float> coordinates;
     private double length_pixels,breadth_pixels,length,breadth,scale_length,scale;
     private ArrayList<Pair<Float, Float>> coordinatesList;
+    public boolean marked = false;
+    ProgressBar loadingProgressBar;
 
 
     protected void onCreate(Bundle savedInstanceState) {
@@ -117,25 +120,50 @@ public class MainActivity3 extends AppCompatActivity {
         });
 
         process = findViewById(R.id.process);
+        loadingProgressBar = findViewById(R.id.loadingProgressBar);
         coordinatesList = new ArrayList<>();
         process.setOnClickListener(new View.OnClickListener() {
+
             @Override
             public void onClick(View view) {
+                process.setVisibility(View.INVISIBLE);
+                loadingProgressBar.setVisibility(View.VISIBLE);
+                process.setEnabled(false);
                 Intent i = new Intent(MainActivity3.this,MainActivity4.class);
 
                 coordinates = drawing_view.coordinates;
-
                 coordinatesList = drawing_view.coordinatesList;
 
                 if(coordinatesList.size()<6){
-                    //TODO Alert Dialog To Display the user to mark sufficient points
-                    //TODO Reset the things
+                    AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity3.this);
+                    builder.setMessage("You Have Marked Less Points Please Mark Again or Click On Help(?) Button for Help")
+                            .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                                public void onClick(DialogInterface dialog, int id) {
+                                    // Code to be executed when the OK button is clicked
+                                    // Add your code here
+                                    drawing_view.clearPaths();
+                                }
+                            });
+
+                    AlertDialog dialog = builder.create();
+                    dialog.show();
                 }
                 if(coordinatesList.size() > 6){
-                    //TODO Alert Dialog To Display the user to remark points bcoz he marked way to many points
-                    //TODO Reset the things
+                    AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity3.this);
+                    builder.setMessage("You Have Marked More Points than needed Please Mark Again or Click On Help(?) Button for Help")
+                            .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                                public void onClick(DialogInterface dialog, int id) {
+                                    // Code to be executed when the OK button is clicked
+                                    // Add your code here
+                                    drawing_view.clearPaths();
+                                }
+                            });
+
+                    AlertDialog dialog = builder.create();
+                    dialog.show();
                 }
                 if(coordinatesList.size() == 6){
+                    marked = true;
                     drawing_view.setSizeForBrush(5f);
                     processBillboard(coordinatesList);
                     calculateScale(coordinatesList);
@@ -157,7 +185,13 @@ public class MainActivity3 extends AppCompatActivity {
                 i.putExtra("length",length);
                 i.putExtra("breadth",breadth);
                 i.putExtra("scale",scale_length);
-                startActivity(i);
+                if(marked){
+                    startActivity(i);
+                }
+                // When the action is complete, hide the progress bar and enable the button
+                loadingProgressBar.setVisibility(View.INVISIBLE);
+                process.setEnabled(true);
+
             }
         });
 
@@ -190,6 +224,7 @@ public class MainActivity3 extends AppCompatActivity {
             try {
                 iv_imgView.setVisibility(View.VISIBLE);
                 bitmap = MediaStore.Images.Media.getBitmap(this.getContentResolver(), data.getData());
+                bitmap_copy = bitmap;
                 iv_imgView.setImageBitmap(bitmap);
             } catch (Exception e) {
                 e.printStackTrace();
@@ -197,6 +232,7 @@ public class MainActivity3 extends AppCompatActivity {
         }if(requestCode == RESULT_OK){
             // Clear the paths ArrayList in the DrawingView
             drawing_view.clearPaths();
+            iv_imgView.setImageBitmap(bitmap_copy);
         }
     }
 
