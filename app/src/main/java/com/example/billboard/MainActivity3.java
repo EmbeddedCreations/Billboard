@@ -29,11 +29,23 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
+import org.opencv.android.Utils;
+import org.opencv.core.Core;
+import org.opencv.core.CvType;
+import org.opencv.core.Mat;
+import org.opencv.core.MatOfPoint;
+import org.opencv.core.MatOfPoint2f;
+import org.opencv.core.Rect;
+import org.opencv.core.Scalar;
+import org.opencv.core.Size;
+import org.opencv.imgproc.Imgproc;
+
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.List;
 
 public class MainActivity3 extends AppCompatActivity {
     private FrameLayout fl_layout;
@@ -45,6 +57,7 @@ public class MainActivity3 extends AppCompatActivity {
     private ImageButton rotateButton,Undo,imageButton,mImageCurrentImageBtn;
     private Button process;
     private Pair<Float, Float> coordinates;
+    private double length_pixels,breadth_pixels,length,breadth,scale_length,scale;
     private ArrayList<Pair<Float, Float>> coordinatesList;
 
 
@@ -109,11 +122,26 @@ public class MainActivity3 extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent i = new Intent(MainActivity3.this,MainActivity4.class);
-                File file = new File(getExternalFilesDir(null), "image.png");
-                Bitmap bitmap_new = getBitmapFromView(fl_layout);
+
                 coordinates = drawing_view.coordinates;
 
-                    coordinatesList = drawing_view.coordinates_List;
+                coordinatesList = drawing_view.coordinatesList;
+
+                if(coordinatesList.size()<6){
+                    //TODO Alert Dialog To Display the user to mark sufficient points
+                    //TODO Reset the things
+                }
+                if(coordinatesList.size() > 6){
+                    //TODO Alert Dialog To Display the user to remark points bcoz he marked way to many points
+                    //TODO Reset the things
+                }
+                if(coordinatesList.size() == 6){
+                    drawing_view.setSizeForBrush(5f);
+                    processBillboard(coordinatesList);
+                    calculateScale(coordinatesList);
+                }
+                File file = new File(getExternalFilesDir(null), "image.png");
+                Bitmap bitmap_new = getBitmapFromView(fl_layout);
 
                 Log.d("Size",String.valueOf(coordinatesList.size()));
                 Log.d("Coordinates", String.valueOf(coordinatesList));
@@ -126,6 +154,9 @@ public class MainActivity3 extends AppCompatActivity {
                     e.printStackTrace();
                 }
                 i.putExtra("imageFilePath", file.getAbsolutePath());
+                i.putExtra("length",length);
+                i.putExtra("breadth",breadth);
+                i.putExtra("scale",scale_length);
                 startActivity(i);
             }
         });
@@ -160,10 +191,12 @@ public class MainActivity3 extends AppCompatActivity {
                 iv_imgView.setVisibility(View.VISIBLE);
                 bitmap = MediaStore.Images.Media.getBitmap(this.getContentResolver(), data.getData());
                 iv_imgView.setImageBitmap(bitmap);
-
             } catch (Exception e) {
                 e.printStackTrace();
             }
+        }if(requestCode == RESULT_OK){
+            // Clear the paths ArrayList in the DrawingView
+            drawing_view.clearPaths();
         }
     }
 
@@ -216,6 +249,42 @@ public class MainActivity3 extends AppCompatActivity {
             mImageCurrentImageBtn.setImageDrawable(ContextCompat.getDrawable(this, R.drawable.pallet));
             mImageCurrentImageBtn = imageButton;
         }
+    }
+
+    //Method to calculate distance between two points
+    public double calculateDist(double x1,double x2,double y1,double y2){
+        double deltaX = x2-x1;
+        double deltaY = y2-y1;
+        double distance = Math.sqrt(deltaX*deltaX + deltaY*deltaY);
+        return distance;
+    }
+    public void processBillboard(ArrayList<Pair<Float,Float>> coordinatesList){
+        Pair<Float,Float> P1 = coordinatesList.get(0);
+        Pair<Float,Float> P2 = coordinatesList.get(1);
+        Pair<Float,Float> P3 = coordinatesList.get(2);
+        Pair<Float,Float> P4 = coordinatesList.get(3);
+        length_pixels = calculateDist(P1.first, P2.first,P1.second, P2.second);
+        breadth_pixels = calculateDist(P2.first, P3.first,P2.second, P3.second);
+        Log.d("Measurement","length_pixels"+Double.toString(length_pixels));
+        Log.d("Measurement","breadth_pixels"+Double.toString(breadth_pixels));
+        drawing_view.drawLine(P1.first,P1.second,P2.first, P2.second);
+        drawing_view.drawLine(P2.first,P2.second,P3.first, P3.second);
+        drawing_view.drawLine(P3.first,P3.second,P4.first, P4.second);
+        drawing_view.drawLine(P4.first,P4.second,P1.first, P1.second);
+
+    }
+    public void calculateScale(ArrayList<Pair<Float,Float>> coordinatesList){
+        Pair<Float,Float> P5 = coordinatesList.get(4);
+        Pair<Float,Float> P6 = coordinatesList.get(5);
+        scale_length = calculateDist(P5.first, P6.first,P5.second, P6.second);
+        scale = 15.3/scale_length;
+        length = length_pixels*scale;
+        breadth = breadth_pixels*scale;
+        Log.d("Measurement","scale_length"+Double.toString(scale_length));
+        Log.d("Measurement","scale"+Double.toString(scale));
+        Log.d("Measurement","length"+Double.toString(length));
+        Log.d("Measurement","breadth"+Double.toString(breadth));
+        drawing_view.drawLine(P5.first,P5.second,P6.first, P6.second);
     }
 
 
