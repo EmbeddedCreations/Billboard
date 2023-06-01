@@ -126,7 +126,7 @@ public class MainActivity3 extends AppCompatActivity {
 
             @Override
             public void onClick(View view) {
-                process.setVisibility(View.INVISIBLE);
+                //process.setVisibility(View.INVISIBLE);
                 loadingProgressBar.setVisibility(View.VISIBLE);
                 process.setEnabled(false);
                 Intent i = new Intent(MainActivity3.this,MainActivity4.class);

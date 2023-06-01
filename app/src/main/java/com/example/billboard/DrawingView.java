@@ -62,7 +62,9 @@ public final class DrawingView extends View {
         if (this.mPaths.size() > 0) {
             this.mUndo.add(this.mPaths.remove(this.mPaths.size() - 1));
             int lastIndex = coordinatesList.size()-1;
-            coordinatesList.remove(lastIndex);
+            if(lastIndex>=0){
+                coordinatesList.remove(lastIndex);
+            }
             this.invalidate();
         }
 
