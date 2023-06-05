@@ -1,17 +1,19 @@
 package com.example.billboard;
 
 import android.Manifest;
-import android.annotation.SuppressLint;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Matrix;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
+import android.net.Uri;
 import android.os.Bundle;
+import android.os.Environment;
 import android.provider.MediaStore;
 import android.util.Log;
 import android.util.Pair;
@@ -29,29 +31,22 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
-
-import org.opencv.android.Utils;
-import org.opencv.core.Core;
-import org.opencv.core.CvType;
-import org.opencv.core.Mat;
-import org.opencv.core.MatOfPoint;
-import org.opencv.core.MatOfPoint2f;
-import org.opencv.core.Rect;
-import org.opencv.core.Scalar;
-import org.opencv.core.Size;
-import org.opencv.imgproc.Imgproc;
+import androidx.core.content.FileProvider;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.List;
+
 
 public class MainActivity3 extends AppCompatActivity {
     private FrameLayout fl_layout;
     private static final int STORAGE_PERMISSION = 1;
     private static final int GALLERY = 2;
+    private static final int CAMERA_CODE = 3;
+    private static final int CAMERA_REQUEST_CODE = 4;
+    private String mCurrentPhotoPath;
     private Bitmap bitmap,bitmap_copy;
     private DrawingView drawing_view;
     private ImageView iv_imgView;
@@ -111,8 +106,38 @@ public class MainActivity3 extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 if (isReadStorageAllowed()) {
-                    Intent pickPhotoIntent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
-                    startActivityForResult(pickPhotoIntent, GALLERY);
+                    getCameraPermission();
+                    AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity3.this);
+                    builder.setTitle("Choose an option")
+                            .setItems(new CharSequence[]{"Gallery", "Camera"}, new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialog, int which) {
+                                    switch (which) {
+                                        case 0:
+                                            // Gallery option selected
+                                            Intent pickPhotoIntent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+                                            startActivityForResult(pickPhotoIntent, GALLERY);
+                                            break;
+                                        case 1:
+                                            String filename = "Billboard";
+                                            File StorageDir = getExternalFilesDir(Environment.DIRECTORY_PICTURES);
+                                            try {
+                                                File imageFile = File.createTempFile(filename,".jpg",StorageDir);
+                                                mCurrentPhotoPath = imageFile.getAbsolutePath();
+                                                Uri imageUri = FileProvider.getUriForFile(MainActivity3.this,"com.example.billboard.file-provider",imageFile);
+                                                Intent myIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+                                                myIntent.putExtra(MediaStore.EXTRA_OUTPUT,imageUri);
+                                                startActivityForResult(myIntent,5);
+                                            } catch (IOException e) {
+                                                Log.d("ErrorForCam",e.toString());
+                                                throw new RuntimeException(e);
+                                            }
+                                            //openCamera();
+                                            break;
+                                    }
+                                }
+                            })
+                            .show();
                 } else {
                     requestStoragePermission();
                 }
@@ -122,6 +147,7 @@ public class MainActivity3 extends AppCompatActivity {
         process = findViewById(R.id.process);
         loadingProgressBar = findViewById(R.id.loadingProgressBar);
         coordinatesList = new ArrayList<>();
+        //Process
         process.setOnClickListener(new View.OnClickListener() {
 
             @Override
@@ -198,6 +224,18 @@ public class MainActivity3 extends AppCompatActivity {
 
 
     }
+
+
+    
+
+    //To Ask and check For Camera Permission
+    private void getCameraPermission(){
+        if(ContextCompat.checkSelfPermission(this,Manifest.permission.CAMERA)!= PackageManager.PERMISSION_GRANTED){
+            ActivityCompat.requestPermissions(this,new String[]{Manifest.permission.CAMERA},CAMERA_CODE);
+        }else{
+            //Do Nothing Relax
+        }
+    }
     //To Check if the Read Storage is Allowed for accessing the Gallery
     private boolean isReadStorageAllowed() {
         int result = ContextCompat.checkSelfPermission(this, Manifest.permission.READ_EXTERNAL_STORAGE);
@@ -218,21 +256,55 @@ public class MainActivity3 extends AppCompatActivity {
 
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-
+        iv_imgView.setVisibility(View.VISIBLE);
         if (requestCode == GALLERY) {
             //
             try {
-                iv_imgView.setVisibility(View.VISIBLE);
+
                 bitmap = MediaStore.Images.Media.getBitmap(this.getContentResolver(), data.getData());
-                bitmap_copy = bitmap;
-                iv_imgView.setImageBitmap(bitmap);
+
+                int imageViewWidth = iv_imgView.getWidth();
+                int imageViewHeight = iv_imgView.getHeight();
+
+                int bitmapWidth = bitmap.getWidth();
+                int bitmapHeight = bitmap.getHeight();
+
+                float scaleWidth = (float) imageViewWidth / bitmapWidth;
+                float scaleHeight = (float) imageViewHeight / bitmapHeight;
+
+                float scaleFactor = Math.min(scaleWidth, scaleHeight);
+
+                int newWidth = Math.round(bitmapWidth * scaleFactor);
+                int newHeight = Math.round(bitmapHeight * scaleFactor);
+
+                Bitmap resizedBitmap = Bitmap.createScaledBitmap(bitmap, newWidth, newHeight, true);
+                iv_imgView.setImageBitmap(resizedBitmap);
             } catch (Exception e) {
                 e.printStackTrace();
             }
-        }if(requestCode == RESULT_OK){
-            // Clear the paths ArrayList in the DrawingView
-            drawing_view.clearPaths();
-            iv_imgView.setImageBitmap(bitmap_copy);
+        }
+        if(requestCode == 5){
+            try {
+                bitmap = BitmapFactory.decodeFile(mCurrentPhotoPath);
+//                int imageViewWidth = iv_imgView.getWidth();
+//                int imageViewHeight = iv_imgView.getHeight();
+//
+//                int bitmapWidth = bitmap.getWidth();
+//                int bitmapHeight = bitmap.getHeight();
+//                float scaleWidth = (float) imageViewWidth / bitmapWidth;
+//                float scaleHeight = (float) imageViewHeight / bitmapHeight;
+//
+//                float scaleFactor = Math.min(scaleWidth, scaleHeight);
+//
+//                int newWidth = Math.round(bitmapWidth * scaleFactor);
+//                int newHeight = Math.round(bitmapHeight * scaleFactor);
+//                Bitmap resizedBitmap = Bitmap.createScaledBitmap(bitmap, newWidth, newHeight, true);
+//                iv_imgView.setImageBitmap(resizedBitmap);
+                iv_imgView.setImageBitmap(bitmap);
+
+            }catch (Exception e){
+                e.printStackTrace();
+            }
         }
     }
 
@@ -262,11 +334,17 @@ public class MainActivity3 extends AppCompatActivity {
         i.putExtra("imageBytes", bitmapToByteArray(getBitmapFromView(fl_layout)));
         startActivity(i);
     }
-
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
 
         if (requestCode == STORAGE_PERMISSION) {
+            if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                Toast.makeText(this, "PERMISSION GRANTED", Toast.LENGTH_SHORT).show();
+            } else {
+                Toast.makeText(this, "PERMISSION Denied ", Toast.LENGTH_SHORT).show();
+            }
+        }
+        if(requestCode == CAMERA_CODE){
             if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                 Toast.makeText(this, "PERMISSION GRANTED", Toast.LENGTH_SHORT).show();
             } else {
