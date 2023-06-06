@@ -55,7 +55,7 @@ public class MainActivity3 extends AppCompatActivity {
     private Pair<Float, Float> coordinates;
     private double length_pixels,breadth_pixels,length,breadth,scale_length,scale;
     private ArrayList<Pair<Float, Float>> coordinatesList;
-    public boolean marked = false;
+    public boolean marked = false,billboardCheck,scaleCheck;
     ProgressBar loadingProgressBar;
 
 
@@ -193,6 +193,9 @@ public class MainActivity3 extends AppCompatActivity {
                     drawing_view.setSizeForBrush(5f);
                     processBillboard(coordinatesList);
                     calculateScale(coordinatesList);
+                    checkScale(coordinatesList);
+                    checkBillboard(coordinatesList);
+
                 }
                 File file = new File(getExternalFilesDir(null), "image.png");
                 Bitmap bitmap_new = getBitmapFromView(fl_layout);
@@ -211,7 +214,7 @@ public class MainActivity3 extends AppCompatActivity {
                 i.putExtra("length",length);
                 i.putExtra("breadth",breadth);
                 i.putExtra("scale",scale_length);
-                if(marked){
+                if(marked && scaleCheck && billboardCheck){
                     startActivity(i);
                 }
                 // When the action is complete, hide the progress bar and enable the button
@@ -223,6 +226,54 @@ public class MainActivity3 extends AppCompatActivity {
 
 
 
+    }
+    private boolean checkBillboard(ArrayList<Pair<Float, Float>> coordinatesList){
+        billboardCheck = true;
+        Pair<Float,Float> P1 = coordinatesList.get(0);
+        Pair<Float,Float> P2 = coordinatesList.get(1);
+        Pair<Float,Float> P3 = coordinatesList.get(2);
+        Pair<Float,Float> P4 = coordinatesList.get(3);
+        if(Math.abs(P1.second - P2.second) >= 100
+            || Math.abs(P2.first - P3.first) >= 100
+            || Math.abs(P3.second - P4.second) >= 100
+            || Math.abs(P1.first - P4.first) >= 100){
+                AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity3.this);
+                builder.setMessage("Please Mark Appropriately or Take  photo of the Billboard Properly")
+                        .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int id) {
+                                // Code to be executed when the OK button is clicked
+                                // Add your code here
+                                drawing_view.clearPaths();
+                            }
+                        });
+
+                AlertDialog dialog = builder.create();
+                dialog.show();
+                billboardCheck =  false;
+        }
+        return billboardCheck;
+    }
+    private boolean checkScale(ArrayList<Pair<Float, Float>> coordinatesList){
+        scaleCheck = true;
+        Pair<Float,Float> P5 = coordinatesList.get(4);
+        Pair<Float,Float> P6 = coordinatesList.get(5);
+        if(Math.abs(P5.second - P6.second) <= 20 || Math.abs(P5.first - P6.first) <= 20){
+            AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity3.this);
+            builder.setMessage("Please Mark Scale Properly The Scale Should be displayed in the image Horizontally" +
+                            "And Please Make Sure that Scale is marked After marking the Billboard")
+                    .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int id) {
+                            // Code to be executed when the OK button is clicked
+                            // Add your code here
+                            drawing_view.clearPaths();
+                        }
+                    });
+
+            AlertDialog dialog = builder.create();
+            dialog.show();
+            scaleCheck =  false;
+        }
+        return scaleCheck;
     }
 
 
