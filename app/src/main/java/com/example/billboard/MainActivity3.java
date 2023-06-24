@@ -277,8 +277,6 @@ public class MainActivity3 extends AppCompatActivity {
     }
 
 
-    
-
     //To Ask and check For Camera Permission
     private void getCameraPermission(){
         if(ContextCompat.checkSelfPermission(this,Manifest.permission.CAMERA)!= PackageManager.PERMISSION_GRANTED){
@@ -305,14 +303,15 @@ public class MainActivity3 extends AppCompatActivity {
         );
     }
 
+    @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         iv_imgView.setVisibility(View.VISIBLE);
-        if (requestCode == GALLERY) {
-            //
-            try {
 
-                bitmap = MediaStore.Images.Media.getBitmap(this.getContentResolver(), data.getData());
+        if (requestCode == GALLERY && resultCode == RESULT_OK && data != null) {
+            try {
+                Uri imageUri = data.getData();
+                bitmap = MediaStore.Images.Media.getBitmap(this.getContentResolver(), imageUri);
 
                 int imageViewWidth = iv_imgView.getWidth();
                 int imageViewHeight = iv_imgView.getHeight();
@@ -330,18 +329,43 @@ public class MainActivity3 extends AppCompatActivity {
 
                 Bitmap resizedBitmap = Bitmap.createScaledBitmap(bitmap, newWidth, newHeight, true);
                 iv_imgView.setImageBitmap(resizedBitmap);
+
+                // Set the bitmap to the DrawingView
+                drawing_view.setBackground(new BitmapDrawable(getResources(), resizedBitmap));
             } catch (Exception e) {
                 e.printStackTrace();
             }
         }
-        if(requestCode == 5){
+        if (requestCode == CAMERA_CODE && resultCode == RESULT_OK) {
             try {
                 bitmap = BitmapFactory.decodeFile(mCurrentPhotoPath);
+                iv_imgView.setImageBitmap(bitmap);
+
+                // Set the bitmap to the DrawingView
+                drawing_view.setBackground(new BitmapDrawable(getResources(), bitmap));
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+
+
+//    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+//        super.onActivityResult(requestCode, resultCode, data);
+//        iv_imgView.setVisibility(View.VISIBLE);
+//        if (requestCode == GALLERY) {
+//            //
+//            try {
+//
+//                bitmap = MediaStore.Images.Media.getBitmap(this.getContentResolver(), data.getData());
+//
 //                int imageViewWidth = iv_imgView.getWidth();
 //                int imageViewHeight = iv_imgView.getHeight();
 //
 //                int bitmapWidth = bitmap.getWidth();
 //                int bitmapHeight = bitmap.getHeight();
+//
 //                float scaleWidth = (float) imageViewWidth / bitmapWidth;
 //                float scaleHeight = (float) imageViewHeight / bitmapHeight;
 //
@@ -349,15 +373,37 @@ public class MainActivity3 extends AppCompatActivity {
 //
 //                int newWidth = Math.round(bitmapWidth * scaleFactor);
 //                int newHeight = Math.round(bitmapHeight * scaleFactor);
+//
 //                Bitmap resizedBitmap = Bitmap.createScaledBitmap(bitmap, newWidth, newHeight, true);
 //                iv_imgView.setImageBitmap(resizedBitmap);
-                iv_imgView.setImageBitmap(bitmap);
-
-            }catch (Exception e){
-                e.printStackTrace();
-            }
-        }
-    }
+//            } catch (Exception e) {
+//                e.printStackTrace();
+//            }
+//        }
+//        if(requestCode == CAMERA_CODE){
+//            try {
+//                bitmap = BitmapFactory.decodeFile(mCurrentPhotoPath);
+////                int imageViewWidth = iv_imgView.getWidth();
+////                int imageViewHeight = iv_imgView.getHeight();
+////
+////                int bitmapWidth = bitmap.getWidth();
+////                int bitmapHeight = bitmap.getHeight();
+////                float scaleWidth = (float) imageViewWidth / bitmapWidth;
+////                float scaleHeight = (float) imageViewHeight / bitmapHeight;
+////
+////                float scaleFactor = Math.min(scaleWidth, scaleHeight);
+////
+////                int newWidth = Math.round(bitmapWidth * scaleFactor);
+////                int newHeight = Math.round(bitmapHeight * scaleFactor);
+////                Bitmap resizedBitmap = Bitmap.createScaledBitmap(bitmap, newWidth, newHeight, true);
+////                iv_imgView.setImageBitmap(resizedBitmap);
+//                iv_imgView.setImageBitmap(bitmap);
+//
+//            }catch (Exception e){
+//                e.printStackTrace();
+//            }
+//        }
+//    }
 
 
     //Creating a function to extract bitmap out of the Drawing view for passing to another Activity
