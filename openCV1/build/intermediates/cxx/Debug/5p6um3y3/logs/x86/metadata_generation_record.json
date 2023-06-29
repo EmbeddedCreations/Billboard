@@ -1,0 +1,170 @@
+[
+  {
+    "level_": 0,
+    "message_": "Start JSON generation. Platform version: 24 min SDK version: x86",
+    "file_": "/Users/abhishek/Desktop/Projects/Untitled/Billboard/openCV1/libcxx_helper/CMakeLists.txt",
+    "tag_": "debug|x86",
+    "diagnosticCode_": 0,
+    "memoizedIsInitialized": 1,
+    "unknownFields": {
+      "fields": {},
+      "fieldsDescending": {}
+    },
+    "memoizedSize": -1,
+    "memoizedHashCode": -835517595
+  },
+  {
+    "level_": 0,
+    "message_": "rebuilding JSON /Users/abhishek/Desktop/Projects/Untitled/Billboard/openCV1/.cxx/Debug/5p6um3y3/x86/android_gradle_build.json due to:",
+    "file_": "/Users/abhishek/Desktop/Projects/Untitled/Billboard/openCV1/libcxx_helper/CMakeLists.txt",
+    "tag_": "debug|x86",
+    "diagnosticCode_": 0,
+    "memoizedIsInitialized": 1,
+    "unknownFields": {
+      "fields": {},
+      "fieldsDescending": {}
+    },
+    "memoizedSize": -1,
+    "memoizedHashCode": 964427789
+  },
+  {
+    "level_": 0,
+    "message_": "- expected json /Users/abhishek/Desktop/Projects/Untitled/Billboard/openCV1/.cxx/Debug/5p6um3y3/x86/android_gradle_build.json file is not present, will remove stale json folder",
+    "file_": "/Users/abhishek/Desktop/Projects/Untitled/Billboard/openCV1/libcxx_helper/CMakeLists.txt",
+    "tag_": "debug|x86",
+    "diagnosticCode_": 0,
+    "memoizedIsInitialized": 1,
+    "unknownFields": {
+      "fields": {},
+      "fieldsDescending": {}
+    },
+    "memoizedSize": -1,
+    "memoizedHashCode": -1576118845
+  },
+  {
+    "level_": 0,
+    "message_": "- missing previous command file /Users/abhishek/Desktop/Projects/Untitled/Billboard/openCV1/.cxx/Debug/5p6um3y3/x86/metadata_generation_command.txt, will remove stale json folder",
+    "file_": "/Users/abhishek/Desktop/Projects/Untitled/Billboard/openCV1/libcxx_helper/CMakeLists.txt",
+    "tag_": "debug|x86",
+    "diagnosticCode_": 0,
+    "memoizedIsInitialized": 1,
+    "unknownFields": {
+      "fields": {},
+      "fieldsDescending": {}
+    },
+    "memoizedSize": -1,
+    "memoizedHashCode": 181859681
+  },
+  {
+    "level_": 0,
+    "message_": "- command changed from previous, will remove stale json folder",
+    "file_": "/Users/abhishek/Desktop/Projects/Untitled/Billboard/openCV1/libcxx_helper/CMakeLists.txt",
+    "tag_": "debug|x86",
+    "diagnosticCode_": 0,
+    "memoizedIsInitialized": 1,
+    "unknownFields": {
+      "fields": {},
+      "fieldsDescending": {}
+    },
+    "memoizedSize": -1,
+    "memoizedHashCode": -46601856
+  },
+  {
+    "level_": 0,
+    "message_": "created folder \u0027/Users/abhishek/Desktop/Projects/Untitled/Billboard/openCV1/.cxx/Debug/5p6um3y3/x86\u0027",
+    "file_": "/Users/abhishek/Desktop/Projects/Untitled/Billboard/openCV1/libcxx_helper/CMakeLists.txt",
+    "tag_": "debug|x86",
+    "diagnosticCode_": 0,
+    "memoizedIsInitialized": 1,
+    "unknownFields": {
+      "fields": {},
+      "fieldsDescending": {}
+    },
+    "memoizedSize": -1,
+    "memoizedHashCode": -178336920
+  },
+  {
+    "level_": 0,
+    "message_": "executing cmake /Users/abhishek/Library/Android/sdk/cmake/3.18.1/bin/cmake \\\n  -H/Users/abhishek/Desktop/Projects/Untitled/Billboard/openCV1/libcxx_helper \\\n  -DCMAKE_SYSTEM_NAME\u003dAndroid \\\n  -DCMAKE_EXPORT_COMPILE_COMMANDS\u003dON \\\n  -DCMAKE_SYSTEM_VERSION\u003d24 \\\n  -DANDROID_PLATFORM\u003dandroid-24 \\\n  -DANDROID_ABI\u003dx86 \\\n  -DCMAKE_ANDROID_ARCH_ABI\u003dx86 \\\n  -DANDROID_NDK\u003d/Users/abhishek/Library/Android/sdk/ndk/23.1.7779620 \\\n  -DCMAKE_ANDROID_NDK\u003d/Users/abhishek/Library/Android/sdk/ndk/23.1.7779620 \\\n  -DCMAKE_TOOLCHAIN_FILE\u003d/Users/abhishek/Library/Android/sdk/ndk/23.1.7779620/build/cmake/android.toolchain.cmake \\\n  -DCMAKE_MAKE_PROGRAM\u003d/Users/abhishek/Library/Android/sdk/cmake/3.18.1/bin/ninja \\\n  -DCMAKE_LIBRARY_OUTPUT_DIRECTORY\u003d/Users/abhishek/Desktop/Projects/Untitled/Billboard/openCV1/build/intermediates/cxx/Debug/5p6um3y3/obj/x86 \\\n  -DCMAKE_RUNTIME_OUTPUT_DIRECTORY\u003d/Users/abhishek/Desktop/Projects/Untitled/Billboard/openCV1/build/intermediates/cxx/Debug/5p6um3y3/obj/x86 \\\n  -DCMAKE_BUILD_TYPE\u003dDebug \\\n  -B/Users/abhishek/Desktop/Projects/Untitled/Billboard/openCV1/.cxx/Debug/5p6um3y3/x86 \\\n  -GNinja \\\n  -DANDROID_STL\u003dc++_shared\n",
+    "file_": "/Users/abhishek/Desktop/Projects/Untitled/Billboard/openCV1/libcxx_helper/CMakeLists.txt",
+    "tag_": "debug|x86",
+    "diagnosticCode_": 0,
+    "memoizedIsInitialized": 1,
+    "unknownFields": {
+      "fields": {},
+      "fieldsDescending": {}
+    },
+    "memoizedSize": -1,
+    "memoizedHashCode": 1566855302
+  },
+  {
+    "level_": 0,
+    "message_": "/Users/abhishek/Library/Android/sdk/cmake/3.18.1/bin/cmake \\\n  -H/Users/abhishek/Desktop/Projects/Untitled/Billboard/openCV1/libcxx_helper \\\n  -DCMAKE_SYSTEM_NAME\u003dAndroid \\\n  -DCMAKE_EXPORT_COMPILE_COMMANDS\u003dON \\\n  -DCMAKE_SYSTEM_VERSION\u003d24 \\\n  -DANDROID_PLATFORM\u003dandroid-24 \\\n  -DANDROID_ABI\u003dx86 \\\n  -DCMAKE_ANDROID_ARCH_ABI\u003dx86 \\\n  -DANDROID_NDK\u003d/Users/abhishek/Library/Android/sdk/ndk/23.1.7779620 \\\n  -DCMAKE_ANDROID_NDK\u003d/Users/abhishek/Library/Android/sdk/ndk/23.1.7779620 \\\n  -DCMAKE_TOOLCHAIN_FILE\u003d/Users/abhishek/Library/Android/sdk/ndk/23.1.7779620/build/cmake/android.toolchain.cmake \\\n  -DCMAKE_MAKE_PROGRAM\u003d/Users/abhishek/Library/Android/sdk/cmake/3.18.1/bin/ninja \\\n  -DCMAKE_LIBRARY_OUTPUT_DIRECTORY\u003d/Users/abhishek/Desktop/Projects/Untitled/Billboard/openCV1/build/intermediates/cxx/Debug/5p6um3y3/obj/x86 \\\n  -DCMAKE_RUNTIME_OUTPUT_DIRECTORY\u003d/Users/abhishek/Desktop/Projects/Untitled/Billboard/openCV1/build/intermediates/cxx/Debug/5p6um3y3/obj/x86 \\\n  -DCMAKE_BUILD_TYPE\u003dDebug \\\n  -B/Users/abhishek/Desktop/Projects/Untitled/Billboard/openCV1/.cxx/Debug/5p6um3y3/x86 \\\n  -GNinja \\\n  -DANDROID_STL\u003dc++_shared\n",
+    "file_": "/Users/abhishek/Desktop/Projects/Untitled/Billboard/openCV1/libcxx_helper/CMakeLists.txt",
+    "tag_": "debug|x86",
+    "diagnosticCode_": 0,
+    "memoizedIsInitialized": 1,
+    "unknownFields": {
+      "fields": {},
+      "fieldsDescending": {}
+    },
+    "memoizedSize": -1,
+    "memoizedHashCode": -473519641
+  },
+  {
+    "level_": 0,
+    "message_": "Exiting generation of /Users/abhishek/Desktop/Projects/Untitled/Billboard/openCV1/.cxx/Debug/5p6um3y3/x86/compile_commands.json.bin normally",
+    "file_": "/Users/abhishek/Desktop/Projects/Untitled/Billboard/openCV1/libcxx_helper/CMakeLists.txt",
+    "tag_": "debug|x86",
+    "diagnosticCode_": 0,
+    "memoizedIsInitialized": 1,
+    "unknownFields": {
+      "fields": {},
+      "fieldsDescending": {}
+    },
+    "memoizedSize": -1,
+    "memoizedHashCode": 1534146029
+  },
+  {
+    "level_": 0,
+    "message_": "done executing cmake",
+    "file_": "/Users/abhishek/Desktop/Projects/Untitled/Billboard/openCV1/libcxx_helper/CMakeLists.txt",
+    "tag_": "debug|x86",
+    "diagnosticCode_": 0,
+    "memoizedIsInitialized": 1,
+    "unknownFields": {
+      "fields": {},
+      "fieldsDescending": {}
+    },
+    "memoizedSize": -1,
+    "memoizedHashCode": -358948107
+  },
+  {
+    "level_": 0,
+    "message_": "write command file /Users/abhishek/Desktop/Projects/Untitled/Billboard/openCV1/.cxx/Debug/5p6um3y3/x86/metadata_generation_command.txt",
+    "file_": "/Users/abhishek/Desktop/Projects/Untitled/Billboard/openCV1/libcxx_helper/CMakeLists.txt",
+    "tag_": "debug|x86",
+    "diagnosticCode_": 0,
+    "memoizedIsInitialized": 1,
+    "unknownFields": {
+      "fields": {},
+      "fieldsDescending": {}
+    },
+    "memoizedSize": -1,
+    "memoizedHashCode": 200827393
+  },
+  {
+    "level_": 0,
+    "message_": "JSON generation completed without problems",
+    "file_": "/Users/abhishek/Desktop/Projects/Untitled/Billboard/openCV1/libcxx_helper/CMakeLists.txt",
+    "tag_": "debug|x86",
+    "diagnosticCode_": 0,
+    "memoizedIsInitialized": 1,
+    "unknownFields": {
+      "fields": {},
+      "fieldsDescending": {}
+    },
+    "memoizedSize": -1,
+    "memoizedHashCode": 1579124977
+  }
+]

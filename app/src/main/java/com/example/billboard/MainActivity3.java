@@ -127,7 +127,7 @@ public class MainActivity3 extends AppCompatActivity {
                                                 Uri imageUri = FileProvider.getUriForFile(MainActivity3.this,"com.example.billboard.file-provider",imageFile);
                                                 Intent myIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
                                                 myIntent.putExtra(MediaStore.EXTRA_OUTPUT,imageUri);
-                                                startActivityForResult(myIntent,5);
+                                                startActivityForResult(myIntent,CAMERA_CODE);
                                             } catch (IOException e) {
                                                 Log.d("ErrorForCam",e.toString());
                                                 throw new RuntimeException(e);
@@ -340,7 +340,6 @@ public class MainActivity3 extends AppCompatActivity {
             try {
                 bitmap = BitmapFactory.decodeFile(mCurrentPhotoPath);
                 iv_imgView.setImageBitmap(bitmap);
-
                 // Set the bitmap to the DrawingView
                 drawing_view.setBackground(new BitmapDrawable(getResources(), bitmap));
             } catch (Exception e) {
