@@ -8,13 +8,11 @@ import android.util.Log;
 import android.widget.ImageView;
 import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
-import org.opencv.core.Mat;
 import java.text.DecimalFormat;
 
 public class MainActivity4 extends AppCompatActivity {
     private ImageView imageView;
     private Bitmap bitmap,receivedBitmap;
-    private Mat mat,bgr;
     private TextView scale,Dimensions;
     private double scale_pixels,length,breadth;
 
