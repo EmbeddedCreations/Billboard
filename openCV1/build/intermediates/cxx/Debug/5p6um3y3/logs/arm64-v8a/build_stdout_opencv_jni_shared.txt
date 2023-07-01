@@ -1,2 +1,0 @@
-ninja: Entering directory `/Users/abhishek/Desktop/Projects/Untitled/Billboard/openCV1/.cxx/Debug/5p6um3y3/arm64-v8a'
-ninja: no work to do.
