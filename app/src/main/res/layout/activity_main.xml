@@ -63,7 +63,7 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:padding="14dp"
-        android:text="Play video"
+        android:text="Show demo video"
         android:textStyle="bold"
         android:textAllCaps="false"
         android:onClick="home1"
