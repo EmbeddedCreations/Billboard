@@ -8,7 +8,6 @@ import android.util.Log;
 import android.widget.ImageView;
 import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
-import org.opencv.android.OpenCVLoader;
 import org.opencv.core.Mat;
 import java.text.DecimalFormat;
 
@@ -33,8 +32,7 @@ public class MainActivity4 extends AppCompatActivity {
         breadth = getIntent().getDoubleExtra("breadth",0);
         // Load the Bitmap from the file
         receivedBitmap = BitmapFactory.decodeFile(filePath);
-        if(OpenCVLoader.initDebug()) Log.d("Loaded","Success");
-        else Log.d("Error","Error");
+
         if (receivedBitmap != null) {
 
             // Use the receivedBitmap as needed
