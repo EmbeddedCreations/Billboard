@@ -253,28 +253,37 @@ public class MainActivity3 extends AppCompatActivity {
         }
         return billboardCheck;
     }
-    private boolean checkScale(ArrayList<Pair<Float, Float>> coordinatesList){
+    private boolean checkScale(ArrayList<Pair<Float, Float>> coordinatesList) {
         scaleCheck = true;
-        Pair<Float,Float> P5 = coordinatesList.get(4);
-        Pair<Float,Float> P6 = coordinatesList.get(5);
-        if(Math.abs(P5.second - P6.second) <= 20 || Math.abs(P5.first - P6.first) <= 20){
+        Pair<Float, Float> P5 = coordinatesList.get(4);
+        Pair<Float, Float> P6 = coordinatesList.get(5);
+        if (Math.abs(P5.second - P6.second) <= 20 || Math.abs(P5.first - P6.first) <= 20) {
             AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity3.this);
-            builder.setMessage("Please Mark Scale Properly The Scale Should be displayed in the image Horizontally" +
-                            "And Please Make Sure that Scale is marked After marking the Billboard")
+            builder.setMessage("Please Mark Scale Properly. The Scale should be displayed horizontally in the image." +
+                            "Please make sure that the Scale is marked after marking the Billboard.")
                     .setPositiveButton("OK", new DialogInterface.OnClickListener() {
                         public void onClick(DialogInterface dialog, int id) {
                             // Code to be executed when the OK button is clicked
                             // Add your code here
                             drawing_view.clearPaths();
                         }
+                    })
+                    .setNegativeButton("Show Demo", new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int id) {
+                            // Code to be executed when the Show Demo button is clicked
+                            // Add your code here to redirect to MainActivity2
+                            Intent intent = new Intent(MainActivity3.this, MainActivity2.class);
+                            startActivity(intent);
+                        }
                     });
 
             AlertDialog dialog = builder.create();
             dialog.show();
-            scaleCheck =  false;
+            scaleCheck = false;
         }
         return scaleCheck;
     }
+
 
 
     //To Ask and check For Camera Permission

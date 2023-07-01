@@ -27,8 +27,8 @@ public class MainActivity2 extends Activity {
 
         // Set media controller to enable video playback controls
         MediaController mediaController = new MediaController(this);
-        videoView.setMediaController(mediaController);
         mediaController.setAnchorView(videoView);
+        videoView.setMediaController(mediaController);
 
         // Set the video URI and start playing
         videoView.setVideoURI(videoUri);
