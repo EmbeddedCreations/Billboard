@@ -330,8 +330,8 @@ public class MainActivity3 extends AppCompatActivity {
                 Bitmap resizedBitmap = Bitmap.createScaledBitmap(bitmap, newWidth, newHeight, true);
                 iv_imgView.setImageBitmap(resizedBitmap);
 
-                // Set the bitmap to the DrawingView
-                drawing_view.setBackground(new BitmapDrawable(getResources(), resizedBitmap));
+//                // Set the bitmap to the DrawingView
+//                drawing_view.setBackground(new BitmapDrawable(getResources(), resizedBitmap));
             } catch (Exception e) {
                 e.printStackTrace();
             }
@@ -341,7 +341,7 @@ public class MainActivity3 extends AppCompatActivity {
                 bitmap = BitmapFactory.decodeFile(mCurrentPhotoPath);
                 iv_imgView.setImageBitmap(bitmap);
                 // Set the bitmap to the DrawingView
-                drawing_view.setBackground(new BitmapDrawable(getResources(), bitmap));
+//                drawing_view.setBackground(new BitmapDrawable(getResources(), bitmap));
             } catch (Exception e) {
                 e.printStackTrace();
             }
