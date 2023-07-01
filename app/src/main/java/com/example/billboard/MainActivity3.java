@@ -1,11 +1,9 @@
 package com.example.billboard;
 
-import android.Manifest;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Matrix;
@@ -13,8 +11,6 @@ import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
-import android.os.Environment;
-import android.provider.MediaStore;
 import android.util.Log;
 import android.util.Pair;
 import android.view.View;
@@ -29,9 +25,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
-import androidx.core.content.FileProvider;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
@@ -45,9 +39,6 @@ public class MainActivity3 extends AppCompatActivity {
     private FrameLayout fl_layout;
     private static final int STORAGE_PERMISSION = 100;
     private static final int CAMERA_CODE = 101;
-    private static final int PERMISSION_CAMERA_REQUEST_CODE = 102;
-    private String mCurrentPhotoPath;
-    private Bitmap bitmap,bitmap_copy;
     private DrawingView drawing_view;
     private ImageView iv_imgView;
     private ImageButton rotateButton,Undo,imageButton,mImageCurrentImageBtn;
@@ -103,12 +94,10 @@ public class MainActivity3 extends AppCompatActivity {
         //For Getting Image From gallery
         imageButton = findViewById(R.id.imageButton);
         imageButton.setOnClickListener(new View.OnClickListener(){
-            //            recreate();
+
             @Override
 
             public void onClick(View v){
-//                Intent intent=new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
-//                startActivityForResult(intent,1);
                 ImagePicker.with(MainActivity3.this)
                         .crop()	    			//Crop image(Optional), Check Customization for more option
                         .compress(1024)			//Final image size will be less than 1 MB(Optional)
@@ -116,47 +105,6 @@ public class MainActivity3 extends AppCompatActivity {
                         .start();
             }
         });
-//        imageButton.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                if (isReadStorageAllowed()) {
-//                    getCameraPermission();
-//                    AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity3.this);
-//                    builder.setTitle("Choose an option")
-//                            .setItems(new CharSequence[]{"Gallery", "Camera"}, new DialogInterface.OnClickListener() {
-//                                @Override
-//                                public void onClick(DialogInterface dialog, int which) {
-//                                    switch (which) {
-//                                        case 0:
-//                                            // Gallery option selected
-//                                            Intent pickPhotoIntent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
-//                                            startActivityForResult(pickPhotoIntent, GALLERY);
-//                                            break;
-//                                        case 1:
-//                                            String filename = "Billboard";
-//                                            File StorageDir = getExternalFilesDir(Environment.DIRECTORY_PICTURES);
-//                                            try {
-//                                                File imageFile = File.createTempFile(filename,".jpg",StorageDir);
-//                                                mCurrentPhotoPath = imageFile.getAbsolutePath();
-//                                                Uri imageUri = FileProvider.getUriForFile(MainActivity3.this,"com.example.billboard.file-provider",imageFile);
-//                                                Intent myIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-//                                                myIntent.putExtra(MediaStore.EXTRA_OUTPUT,imageUri);
-//                                                startActivityForResult(myIntent,5);
-//                                            } catch (IOException e) {
-//                                                Log.d("ErrorForCam",e.toString());
-//                                                throw new RuntimeException(e);
-//                                            }
-//                                            //openCamera();
-//                                            break;
-//                                    }
-//                                }
-//                            })
-//                            .show();
-//                } else {
-//                    requestStoragePermission();
-//                }
-//            }
-//        });
 
         process = findViewById(R.id.process);
         loadingProgressBar = findViewById(R.id.loadingProgressBar);
@@ -255,8 +203,6 @@ public class MainActivity3 extends AppCompatActivity {
                 builder.setMessage("Please Mark Appropriately or Take  photo of the Billboard Properly")
                         .setPositiveButton("OK", new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int id) {
-                                // Code to be executed when the OK button is clicked
-                                // Add your code here
                                 drawing_view.clearPaths();
                             }
                         });
@@ -277,15 +223,11 @@ public class MainActivity3 extends AppCompatActivity {
                             "Please make sure that the Scale is marked after marking the Billboard.")
                     .setPositiveButton("OK", new DialogInterface.OnClickListener() {
                         public void onClick(DialogInterface dialog, int id) {
-                            // Code to be executed when the OK button is clicked
-                            // Add your code here
                             drawing_view.clearPaths();
                         }
                     })
                     .setNegativeButton("Show Demo", new DialogInterface.OnClickListener() {
                         public void onClick(DialogInterface dialog, int id) {
-                            // Code to be executed when the Show Demo button is clicked
-                            // Add your code here to redirect to MainActivity2
                             Intent intent = new Intent(MainActivity3.this, MainActivity2.class);
                             startActivity(intent);
                         }
@@ -298,139 +240,12 @@ public class MainActivity3 extends AppCompatActivity {
         return scaleCheck;
     }
 
-
-
-    //To Ask and check For Camera Permission
-    private void getCameraPermission(){
-        if(ContextCompat.checkSelfPermission(this,Manifest.permission.CAMERA)!= PackageManager.PERMISSION_GRANTED){
-            ActivityCompat.requestPermissions(this,new String[]{Manifest.permission.CAMERA},CAMERA_CODE);
-        }else{
-            //Do Nothing Relax
-        }
-    }
-    //To Check if the Read Storage is Allowed for accessing the Gallery
-    private boolean isReadStorageAllowed() {
-        int result = ContextCompat.checkSelfPermission(this, Manifest.permission.READ_EXTERNAL_STORAGE);
-        return result == PackageManager.PERMISSION_GRANTED;
-    }
-    //To Request Permission from the User for gallery of his Phone
-    private void requestStoragePermission() {
-        if (ActivityCompat.shouldShowRequestPermissionRationale(this,
-                String.valueOf(new String[]{Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.WRITE_EXTERNAL_STORAGE}))) {
-            Toast.makeText(this, "NEED BACKGROUND IMAGE PERMISSION", Toast.LENGTH_SHORT).show();
-        }
-        ActivityCompat.requestPermissions(
-                this,
-                new String[]{Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.WRITE_EXTERNAL_STORAGE},
-                STORAGE_PERMISSION
-        );
-    }
-
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         Uri uri =data.getData();
         iv_imgView.setImageURI(uri);
-//        super.onActivityResult(requestCode, resultCode, data);
-//        iv_imgView.setVisibility(View.VISIBLE);
-//
-//        if (requestCode == GALLERY && resultCode == RESULT_OK && data != null) {
-//            try {
-//                Uri imageUri = data.getData();
-//                bitmap = MediaStore.Images.Media.getBitmap(this.getContentResolver(), imageUri);
-//
-//                int imageViewWidth = iv_imgView.getWidth();
-//                int imageViewHeight = iv_imgView.getHeight();
-//
-//                int bitmapWidth = bitmap.getWidth();
-//                int bitmapHeight = bitmap.getHeight();
-//
-//                float scaleWidth = (float) imageViewWidth / bitmapWidth;
-//                float scaleHeight = (float) imageViewHeight / bitmapHeight;
-//
-//                float scaleFactor = Math.min(scaleWidth, scaleHeight);
-//
-//                int newWidth = Math.round(bitmapWidth * scaleFactor);
-//                int newHeight = Math.round(bitmapHeight * scaleFactor);
-//
-//                Bitmap resizedBitmap = Bitmap.createScaledBitmap(bitmap, newWidth, newHeight, true);
-//                iv_imgView.setImageBitmap(resizedBitmap);
-//
-//                // Set the bitmap to the DrawingView
-//                drawing_view.setBackground(new BitmapDrawable(getResources(), resizedBitmap));
-//            } catch (Exception e) {
-//                e.printStackTrace();
-//            }
-//        }
-//        if (requestCode == CAMERA_CODE && resultCode == RESULT_OK) {
-//            try {
-//                bitmap = BitmapFactory.decodeFile(mCurrentPhotoPath);
-//                iv_imgView.setImageBitmap(bitmap);
-//
-//                // Set the bitmap to the DrawingView
-//                drawing_view.setBackground(new BitmapDrawable(getResources(), bitmap));
-//            } catch (Exception e) {
-//                e.printStackTrace();
-//            }
-//        }
     }
-
-
-
-//    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
-//        super.onActivityResult(requestCode, resultCode, data);
-//        iv_imgView.setVisibility(View.VISIBLE);
-//        if (requestCode == GALLERY) {
-//            //
-//            try {
-//
-//                bitmap = MediaStore.Images.Media.getBitmap(this.getContentResolver(), data.getData());
-//
-//                int imageViewWidth = iv_imgView.getWidth();
-//                int imageViewHeight = iv_imgView.getHeight();
-//
-//                int bitmapWidth = bitmap.getWidth();
-//                int bitmapHeight = bitmap.getHeight();
-//
-//                float scaleWidth = (float) imageViewWidth / bitmapWidth;
-//                float scaleHeight = (float) imageViewHeight / bitmapHeight;
-//
-//                float scaleFactor = Math.min(scaleWidth, scaleHeight);
-//
-//                int newWidth = Math.round(bitmapWidth * scaleFactor);
-//                int newHeight = Math.round(bitmapHeight * scaleFactor);
-//
-//                Bitmap resizedBitmap = Bitmap.createScaledBitmap(bitmap, newWidth, newHeight, true);
-//                iv_imgView.setImageBitmap(resizedBitmap);
-//            } catch (Exception e) {
-//                e.printStackTrace();
-//            }
-//        }
-//        if(requestCode == CAMERA_CODE){
-//            try {
-//                bitmap = BitmapFactory.decodeFile(mCurrentPhotoPath);
-////                int imageViewWidth = iv_imgView.getWidth();
-////                int imageViewHeight = iv_imgView.getHeight();
-////
-////                int bitmapWidth = bitmap.getWidth();
-////                int bitmapHeight = bitmap.getHeight();
-////                float scaleWidth = (float) imageViewWidth / bitmapWidth;
-////                float scaleHeight = (float) imageViewHeight / bitmapHeight;
-////
-////                float scaleFactor = Math.min(scaleWidth, scaleHeight);
-////
-////                int newWidth = Math.round(bitmapWidth * scaleFactor);
-////                int newHeight = Math.round(bitmapHeight * scaleFactor);
-////                Bitmap resizedBitmap = Bitmap.createScaledBitmap(bitmap, newWidth, newHeight, true);
-////                iv_imgView.setImageBitmap(resizedBitmap);
-//                iv_imgView.setImageBitmap(bitmap);
-//
-//            }catch (Exception e){
-//                e.printStackTrace();
-//            }
-//        }
-//    }
-
 
     //Creating a function to extract bitmap out of the Drawing view for passing to another Activity
     private Bitmap getBitmapFromView(View view) {
@@ -523,6 +338,4 @@ public class MainActivity3 extends AppCompatActivity {
         Log.d("Measurement","breadth"+Double.toString(breadth));
         drawing_view.drawLine(P5.first,P5.second,P6.first, P6.second);
     }
-
-
 }

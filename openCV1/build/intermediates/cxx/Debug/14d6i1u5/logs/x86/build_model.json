@@ -126,7 +126,7 @@
         "rootBuildGradleFolder": "D:\\google-map-main\\Billboard",
         "sdkFolder": "C:\\Users\\Deepak Singh\\AppData\\Local\\Android\\Sdk",
         "isBuildOnlyTargetAbiEnabled": true,
-        "ideBuildTargetAbi": "x86",
+        "ideBuildTargetAbi": "x86,armeabi-v7a,armeabi",
         "isCmakeBuildCohabitationEnabled": false,
         "isPrefabEnabled": false
       },
