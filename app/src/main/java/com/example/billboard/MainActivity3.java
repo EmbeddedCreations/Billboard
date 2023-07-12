@@ -9,6 +9,7 @@ import android.graphics.Color;
 import android.graphics.Matrix;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
+import android.media.MediaPlayer;
 import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
@@ -48,7 +49,7 @@ public class MainActivity3 extends AppCompatActivity {
     private ArrayList<Pair<Float, Float>> coordinatesList;
     public boolean marked = false,billboardCheck,scaleCheck;
     ProgressBar loadingProgressBar;
-
+    private MediaPlayer mediaPlayer;
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -291,15 +292,43 @@ public class MainActivity3 extends AppCompatActivity {
         }
     }
 
+
     public void paintClicked(View view) {
         if (view != mImageCurrentImageBtn) {
             ImageButton imageButton = (ImageButton) view;
-
             String colorTag = imageButton.getTag().toString();
             drawing_view.setColor(colorTag);
             imageButton.setImageDrawable(ContextCompat.getDrawable(this, R.drawable.pallet_pressed));
             mImageCurrentImageBtn.setImageDrawable(ContextCompat.getDrawable(this, R.drawable.pallet));
             mImageCurrentImageBtn = imageButton;
+
+            // Play "tuk-tuk" sound on button click
+            playTukTukSound();
+        }
+    }
+
+    private void playTukTukSound() {
+        if (mediaPlayer != null && mediaPlayer.isPlaying()) {
+            mediaPlayer.stop();
+            mediaPlayer.release();
+        }
+        mediaPlayer = MediaPlayer.create(this, R.raw.click_effect);
+        mediaPlayer.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+            @Override
+            public void onCompletion(MediaPlayer mp) {
+                mediaPlayer.release();
+                mediaPlayer = null;
+            }
+        });
+        mediaPlayer.start();
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        if (mediaPlayer != null) {
+            mediaPlayer.release();
+            mediaPlayer = null;
         }
     }
 
@@ -338,4 +367,5 @@ public class MainActivity3 extends AppCompatActivity {
         Log.d("Measurement","breadth"+Double.toString(breadth));
         drawing_view.drawLine(P5.first,P5.second,P6.first, P6.second);
     }
+
 }
