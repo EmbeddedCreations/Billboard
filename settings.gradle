@@ -16,4 +16,3 @@ dependencyResolutionManagement {
 }
 rootProject.name = "Billboard"
 include ':app'
-include ':openCV1'
