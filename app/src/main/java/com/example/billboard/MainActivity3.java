@@ -218,7 +218,7 @@ public class MainActivity3 extends AppCompatActivity {
         scaleCheck = true;
         Pair<Float, Float> P5 = coordinatesList.get(4);
         Pair<Float, Float> P6 = coordinatesList.get(5);
-        if (Math.abs(P6.second - P5.second) <= 20 || Math.abs(P6.first - P5.first) <= 20) {
+        if (Math.abs(P6.second - P5.second) <= 5 || Math.abs(P6.first - P5.first) <= 5) {
             AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity3.this);
             builder.setMessage("Please Mark Scale Properly. The Scale should be displayed horizontally in the image." +
                             "Please make sure that the Scale is marked after marking the Billboard.")

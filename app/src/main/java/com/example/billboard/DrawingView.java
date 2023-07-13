@@ -11,6 +11,7 @@ import android.graphics.Bitmap.Config;
 import android.graphics.Paint.Cap;
 import android.graphics.Paint.Join;
 import android.graphics.Paint.Style;
+import android.media.MediaPlayer;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.util.Pair;
@@ -32,6 +33,7 @@ public final class DrawingView extends View {
     private Paint mDrawPaint;
     private Paint mCanvasPaint;
     private float mBrushSize;
+    private MediaPlayer mediaPlayer;
     private int color;
     private Canvas canvas;
     private final ArrayList mPaths;
@@ -145,6 +147,21 @@ public final class DrawingView extends View {
         }
 
     }
+    private void playTukTukSound() {
+        if (mediaPlayer != null && mediaPlayer.isPlaying()) {
+            mediaPlayer.stop();
+            mediaPlayer.release();
+        }
+        mediaPlayer = MediaPlayer.create(this.getContext(), R.raw.click_effect);
+        mediaPlayer.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+            @Override
+            public void onCompletion(MediaPlayer mp) {
+                mediaPlayer.release();
+                mediaPlayer = null;
+            }
+        });
+        mediaPlayer.start();
+    }
 
     public ArrayList<Pair<Float, Float>> coordinatesList = new ArrayList<>();
 
@@ -153,13 +170,9 @@ public final class DrawingView extends View {
         label49: {
             Float touchx = event != null ? event.getX() : null;
             Float touchy = event != null ? event.getY() : null;
-            Log.d("Cord", touchx.toString());
-            Log.d("Cord", touchy.toString());
 
-            coordinates = new Pair<>(touchx, touchy);
-            if (!coordinatesList.contains(coordinates)) {
-                coordinatesList.add(coordinates);
-            }
+
+
             Integer var4 = event != null ? event.getAction() : null;
             boolean var5 = false;
             CustomPath var7;
@@ -179,6 +192,11 @@ public final class DrawingView extends View {
                     Intrinsics.checkNotNull(touchy);
                     var7.reset();
                     var7.moveTo(var8, touchy);
+                    playTukTukSound();
+                    coordinates = new Pair<>(touchx, touchy);
+                    if (!coordinatesList.contains(coordinates)) {
+                        coordinatesList.add(coordinates);
+                    }
                     break label49;
                 }
             }
