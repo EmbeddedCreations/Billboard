@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity">
+    tools:context=".MainActivity4">
 
     <ImageView
         android:id="@+id/image_view"
@@ -58,5 +58,17 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/Dimensions" />
+
+    <ProgressBar
+        android:id="@+id/loader"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:visibility="gone"
+        android:indeterminateTint="#FFFFFF"
+        app:layout_constraintBottom_toBottomOf="@+id/image_view"
+        app:layout_constraintEnd_toEndOf="@+id/image_view"
+        app:layout_constraintStart_toStartOf="@+id/image_view"
+        app:layout_constraintTop_toTopOf="@+id/image_view" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
