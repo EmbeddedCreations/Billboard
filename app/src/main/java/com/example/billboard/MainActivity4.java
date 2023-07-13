@@ -4,10 +4,12 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
+import android.os.Handler;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -21,6 +23,7 @@ public class MainActivity4 extends AppCompatActivity {
     private TextView scale, Dimensions;
     private double scale_pixels, length, breadth;
     private Button uploadButton;
+    private ProgressBar loader;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,6 +33,7 @@ public class MainActivity4 extends AppCompatActivity {
         scale = findViewById(R.id.scale);
         Dimensions = findViewById(R.id.Dimensions);
         uploadButton = findViewById(R.id.upload_button);
+        loader = findViewById(R.id.loader);
 
         // Retrieve the file path from the intent
         String filePath = getIntent().getStringExtra("imageFilePath");
@@ -40,9 +44,7 @@ public class MainActivity4 extends AppCompatActivity {
         receivedBitmap = BitmapFactory.decodeFile(filePath);
 
         if (receivedBitmap != null) {
-
             // Use the receivedBitmap as needed
-
             imageView.setImageBitmap(receivedBitmap);
             DecimalFormat decimalFormat = new DecimalFormat("#.##");
             scale.setText("Scale: 15cm = " + decimalFormat.format(scale_pixels) + " Pixels");
@@ -51,9 +53,20 @@ public class MainActivity4 extends AppCompatActivity {
             uploadButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    // Perform upload to cloud functionality here
-                    // For now, display a toast message "Uploaded successfully"
-                    Toast.makeText(MainActivity4.this, "Uploaded successfully", Toast.LENGTH_SHORT).show();
+                    // Show the loader
+                    loader.setVisibility(View.VISIBLE);
+
+                    // Perform upload to cloud functionality here (Simulating with delay)
+                    new Handler().postDelayed(new Runnable() {
+                        @Override
+                        public void run() {
+                            // Hide the loader
+                            loader.setVisibility(View.GONE);
+
+                            // Display "Uploaded successfully" message
+                            Toast.makeText(MainActivity4.this, "Uploaded successfully", Toast.LENGTH_SHORT).show();
+                        }
+                    }, 2000); // Delay of 2000 milliseconds (2 seconds)
                 }
             });
 

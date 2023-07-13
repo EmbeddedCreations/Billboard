@@ -196,10 +196,10 @@ public class MainActivity3 extends AppCompatActivity {
         Pair<Float,Float> P2 = coordinatesList.get(1);
         Pair<Float,Float> P3 = coordinatesList.get(2);
         Pair<Float,Float> P4 = coordinatesList.get(3);
-        if(Math.abs(P1.second - P2.second) >= 100
-            || Math.abs(P2.first - P3.first) >= 100
-            || Math.abs(P3.second - P4.second) >= 100
-            || Math.abs(P1.first - P4.first) >= 100){
+        if(Math.abs(P1.second - P2.second) >= 300
+            || Math.abs(P2.first - P3.first) >= 300
+            || Math.abs(P3.second - P4.second) >= 300
+            || Math.abs(P1.first - P4.first) >= 300){
                 AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity3.this);
                 builder.setMessage("Please Mark Appropriately or Take  photo of the Billboard Properly")
                         .setPositiveButton("OK", new DialogInterface.OnClickListener() {
