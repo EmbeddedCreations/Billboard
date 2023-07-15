@@ -27,8 +27,6 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
-
-import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -186,9 +184,6 @@ public class MainActivity3 extends AppCompatActivity {
 
             }
         });
-
-
-
     }
     private boolean checkBillboard(ArrayList<Pair<Float, Float>> coordinatesList){
         billboardCheck = true;
@@ -261,17 +256,6 @@ public class MainActivity3 extends AppCompatActivity {
         view.draw(canvas);
 
         return returnedBitmap;
-    }
-    //Converting Bitmap to Byte Array
-    private byte[] bitmapToByteArray(Bitmap bitmap) {
-        ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
-        bitmap.compress(Bitmap.CompressFormat.PNG, 100, byteArrayOutputStream);
-        return byteArrayOutputStream.toByteArray();
-    }
-    public void toProcess(View view){
-        Intent i = new Intent(MainActivity3.this,MainActivity4.class);
-        i.putExtra("imageBytes", bitmapToByteArray(getBitmapFromView(fl_layout)));
-        startActivity(i);
     }
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
