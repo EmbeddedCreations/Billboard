@@ -197,14 +197,14 @@
         android:id="@+id/imageButton"
         android:layout_width="50dp"
         android:layout_height="50dp"
-        android:src="@drawable/baseline_image_24"
-        tools:layout_editor_absoluteX="327dp"
-        tools:layout_editor_absoluteY="749dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/linear_layout"
-        app:layout_constraintLeft_toLeftOf="parent"
+        android:layout_margin="5dp"
         android:backgroundTint="#3C3A3A"
-        />
+        android:scaleType="fitXY"
+        android:src="@drawable/baseline_rotate_right_24"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/linear_layout"
+         />
 
     <Button
         android:id="@+id/process"
