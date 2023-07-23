@@ -196,7 +196,7 @@ public class MainActivity3 extends AppCompatActivity {
             || Math.abs(P3.second - P4.second) >= 300
             || Math.abs(P1.first - P4.first) >= 300){
                 AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity3.this);
-                builder.setMessage("Please Mark Appropriately or Take  photo of the Billboard Properly")
+                builder.setMessage("Please Mark Appropriately or Take  photo of the BillboardData Properly")
                         .setPositiveButton("OK", new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int id) {
                                 drawing_view.clearPaths();
@@ -216,7 +216,7 @@ public class MainActivity3 extends AppCompatActivity {
         if (Math.abs(P6.second - P5.second) <= 5 || Math.abs(P6.first - P5.first) <= 5) {
             AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity3.this);
             builder.setMessage("Please Mark Scale Properly. The Scale should be displayed horizontally in the image." +
-                            "Please make sure that the Scale is marked after marking the Billboard.")
+                            "Please make sure that the Scale is marked after marking the BillboardData.")
                     .setPositiveButton("OK", new DialogInterface.OnClickListener() {
                         public void onClick(DialogInterface dialog, int id) {
                             drawing_view.clearPaths();

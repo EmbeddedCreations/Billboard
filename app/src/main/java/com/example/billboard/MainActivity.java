@@ -22,12 +22,12 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void home(View view) {
-        Intent i = new Intent(this, MainActivity3.class);
+        Intent i = new Intent(MainActivity.this, DisplayBillboards.class);
         startActivity(i);
     }
 
     public void home1(View view) {
-        Intent i = new Intent(this, MainActivity2.class);
+        Intent i = new Intent(MainActivity.this, MainActivity2.class);
         startActivity(i);
     }
 

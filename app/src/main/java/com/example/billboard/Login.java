@@ -1,6 +1,8 @@
 package com.example.billboard;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.StrictMode;
 import android.text.TextUtils;
@@ -29,13 +31,11 @@ public class Login extends AppCompatActivity {
     String address = "https://embeddedcreation.in/deeGIS/backend/login.php";
     InputStream is = null;
     String line;
+    public static String username;
     String result;
 
     String[] uname,pass;
 
-    // Hardcoded username and password for demonstration purposes
-    private static final String CORRECT_USERNAME = "admin";
-    private static final String CORRECT_PASSWORD = "password";
     ArrayAdapter<String> adapter;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,7 +53,7 @@ public class Login extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 // Retrieve input values
-                String username = usernameEditText.getText().toString().trim();
+                username = usernameEditText.getText().toString().trim();
                 String password = passwordEditText.getText().toString().trim();
                 Log.d("uname",uname[1]);
                 int index = -1;
@@ -117,6 +117,4 @@ public class Login extends AppCompatActivity {
 
         }
     }
-
-
 }
