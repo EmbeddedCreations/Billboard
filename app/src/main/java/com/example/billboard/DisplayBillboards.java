@@ -1,5 +1,6 @@
 package com.example.billboard;
 
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.StrictMode;
@@ -21,18 +22,18 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLEncoder;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 public class DisplayBillboards extends AppCompatActivity {
 
     //Accessing the username from login
-
-
-
     String userId = Login.username;
 
-
-    String address = "http://192.168.1.5/fetch_billboards.php?user="+userId;
+    public static String current_ID,current_billboard,user_name;
+    public static int billboards_count[];
+    public static HashMap<Integer,String[]> billboardList;
+    String address = "http://172.20.10.4/fetch_billboards.php?user="+userId;
     InputStream is = null;
     String line,result;
     private RecyclerView recyclerView;
@@ -49,8 +50,9 @@ public class DisplayBillboards extends AppCompatActivity {
         getData();
         List<BillboardData> BillboardCards = new ArrayList<>();
         for(int i =0;i<id.length;i++){
-            Log.d("id",id[i]);
             String[] Billboard = trip[i].split("->");
+//            billboards_count[i] = Billboard.length;
+//            billboardList.put(i,Billboard);
             for(int j =0;j<Billboard.length;j++){
                 BillboardCards.add(new BillboardData(id[i],Billboard[j],name[i]));
             }
@@ -88,14 +90,22 @@ public class DisplayBillboards extends AppCompatActivity {
             name = new String[js.length()];
             for(int i =0;i< js.length();i++){
                 jo = js.getJSONObject(i);
-                id[i] = jo.getString("id");
-                trip[i] = jo.getString("Trip");
-                trip_date[i] = jo.getString("Trip_date");
-                name[i] = jo.getString("Name");
+                if(jo.getString("Trip_Completed").equals("0")){
+                    id[i] = jo.getString("id");
+                    trip[i] = jo.getString("Trip");
+                    trip_date[i] = jo.getString("Trip_date");
+                    name[i] = jo.getString("Name");
+                }
             }
-
         }catch(Exception e){
             e.printStackTrace();
+        }
+    }
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if(requestCode == 1 && resultCode == RESULT_OK){
+
         }
     }
 }

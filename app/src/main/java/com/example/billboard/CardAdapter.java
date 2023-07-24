@@ -39,7 +39,9 @@ public class CardAdapter extends RecyclerView.Adapter<CardAdapter.ViewHolder> {
             public void onClick(View view) {
                 Context context = view.getContext();
                 Intent i = new Intent(context, MainActivity3.class);
-                i.putExtra("billboard_name", Billboard.getBillboardName());
+                DisplayBillboards.current_ID = Billboard.getId();
+                DisplayBillboards.user_name = Billboard.getName();
+                DisplayBillboards.current_billboard = Billboard.getBillboardName();
                 context.startActivity(i);
             }
         });

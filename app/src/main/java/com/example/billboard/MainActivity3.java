@@ -175,6 +175,7 @@ public class MainActivity3 extends AppCompatActivity {
                 i.putExtra("length",length);
                 i.putExtra("breadth",breadth);
                 i.putExtra("scale",scale_length);
+
                 if(marked && scaleCheck && billboardCheck){
                     startActivity(i);
                 }

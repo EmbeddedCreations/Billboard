@@ -69,6 +69,7 @@ public class Login extends AppCompatActivity {
                 } else {
                     // Check username and password
                     if ( password.equals(pass[index])) {
+
                         // Username and password are correct, proceed to the next activity
                         Intent intent = new Intent(Login.this, MainActivity.class);
                         startActivity(intent);

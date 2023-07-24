@@ -5,6 +5,7 @@ public class BillboardData {
     String billboardName;
     String Name;
 
+
     BillboardData(String id, String billboardName, String Name) {
         this.id = id;
         this.billboardName = billboardName;
@@ -15,5 +16,8 @@ public class BillboardData {
     }
     public String getId(){
         return id;
+    }
+    public String getName(){
+        return Name;
     }
 }
