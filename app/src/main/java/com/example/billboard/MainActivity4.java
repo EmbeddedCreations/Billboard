@@ -69,7 +69,7 @@ public class MainActivity4 extends AppCompatActivity {
         breadth = getIntent().getDoubleExtra("breadth", 0);
         // Load the Bitmap from the file
         receivedBitmap = BitmapFactory.decodeFile(filePath);
-        encodebitmap(receivedBitmap);
+
 
         if (receivedBitmap != null) {
             // Use the receivedBitmap as needed
@@ -118,6 +118,7 @@ public class MainActivity4 extends AppCompatActivity {
         int user_id = Integer.parseInt(DisplayBillboards.current_ID);
         String name = DisplayBillboards.user_name;
         String billboardName = DisplayBillboards.current_billboard;
+        encodedImage = GetEncodedBitmap(receivedBitmap);
 
         // Get the current date and time
         Date date = new Date();
@@ -140,7 +141,7 @@ public class MainActivity4 extends AppCompatActivity {
               map.put("user_id", String.valueOf(user_id));
               map.put("billboardName",billboardName);
               map.put("name",name);
-              map.put("uplaod",encodedImage);
+              map.put("upload",encodedImage);
               map.put("height", String.valueOf(height));
               map.put("width", String.valueOf(width));
               map.put("Date", String.valueOf(date));
@@ -151,36 +152,15 @@ public class MainActivity4 extends AppCompatActivity {
         queue.add(request);
 
     }
-    private String getRelativePath(String absolutePath) {
-        // Get the current working directory as a File object
-        File currentWorkingDirectory = getExternalFilesDir(null);
 
-        // Convert the absolute path to a File object
-        File absoluteFilePath = new File(absolutePath);
 
-        // Get the canonical paths of both File objects to handle symbolic links, etc.
-        String currentWorkingDirectoryPath = currentWorkingDirectory.getAbsolutePath();
-        String absoluteFilePathPath = absoluteFilePath.getAbsolutePath();
-
-        // Get the relative path using String manipulation
-        if (absoluteFilePathPath.startsWith(currentWorkingDirectoryPath)) {
-            String relativePath = absoluteFilePathPath.substring(currentWorkingDirectoryPath.length());
-            if (relativePath.startsWith(File.separator)) {
-                relativePath = relativePath.substring(1); // Remove the leading separator if present
-            }
-            return relativePath;
-        }
-
-        // If the absolute path is not within the current working directory, return the absolute path itself
-        return absolutePath;
-    }
-
-    private void encodebitmap(Bitmap bitmap){
+    private String GetEncodedBitmap(Bitmap bitmap){
         ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
         bitmap.compress(Bitmap.CompressFormat.JPEG,100,byteArrayOutputStream);
 
-        byte[] byteofImages = byteArrayOutputStream.toByteArray();
-        encodedImage = android.util.Base64.encodeToString(byteofImages, Base64.DEFAULT);
+        byte[] byteOfImages = byteArrayOutputStream.toByteArray();
+        String encoded_Image = android.util.Base64.encodeToString(byteOfImages, Base64.DEFAULT);
+        return encoded_Image;
     }
 
 
